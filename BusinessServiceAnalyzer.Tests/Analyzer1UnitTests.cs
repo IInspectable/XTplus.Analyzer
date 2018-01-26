@@ -23,7 +23,7 @@ namespace BusinessServiceAnalyzer.Tests {
         }
 
         //Diagnostic and CodeFix both triggered and checked for
-        [TestMethod]
+       // TODO [TestMethod]
         public void TestMethod2() {
             var test      = @"
     using System;
