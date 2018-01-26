@@ -5,3 +5,5 @@
 /BusinessServiceAnalyzer/bin
 /BusinessServiceAnalyzer/obj
 /.vs
+/BusinessServiceAnalyzer.Tests/bin
+/BusinessServiceAnalyzer.Tests/obj
