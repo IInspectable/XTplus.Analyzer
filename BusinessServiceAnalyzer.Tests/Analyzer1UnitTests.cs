@@ -12,19 +12,17 @@ using Pharmatechnik.Apotheke.XTplus.Analyzer;
 namespace BusinessServiceAnalyzer.Tests {
 
     [TestClass]
-    public class UnitTest: CodeFixVerifier {
+    public class BusinessServiceAnalyzerUnitTest : CodeFixVerifier {
 
-        //No diagnostics expected to show up
         [TestMethod]
-        public void TestMethod1() {
+        public void TrivialTest() {
             var test = @"";
 
             VerifyCSharpDiagnostic(test);
         }
 
-        //Diagnostic and CodeFix both triggered and checked for
-       // TODO [TestMethod]
-        public void TestMethod2() {
+       [TestMethod]
+        public void PublicMethodHasToBeVirtual() {
             var test      = @"
             using Pharmatechnik.Apotheke.XTplus.Framework.Core.IBOL;
 
@@ -34,37 +32,36 @@ namespace BusinessServiceAnalyzer.Tests {
 
             interface ITestBS: IBusinessService { }
 
-            class TestBS {
+            class TestBS: ITestBS {
                 public void Foo();
             }
             ";
-
+           string m = "void TestBS.Foo()";
             var expected  = new DiagnosticResult {
                 Id        = Pharmatechnik.Apotheke.XTplus.Analyzer.BusinessServiceAnalyzer.VirtualMethodDiagnosticId,
-                Message   = $"Business service method 'Foo()' has to be virtual.",
+                Message   = $"Business service method '{m}' has to be virtual.",
                 Severity  = DiagnosticSeverity.Error,
                 Locations =
                     new[] {
-                        new DiagnosticResultLocation("Test0.cs", 11, 15)
+                        new DiagnosticResultLocation("Test0.cs", 11, 29)
                     }
             };
 
             VerifyCSharpDiagnostic(test, expected);
 
             var fixtest = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
+            using Pharmatechnik.Apotheke.XTplus.Framework.Core.IBOL;
 
-    namespace ConsoleApplication1
-    {
-        class TYPENAME
-        {   
-        }
-    }";
+            namespace Pharmatechnik.Apotheke.XTplus.Framework.Core.IBOL {
+                interface IBusinessService { }
+            }
+
+            interface ITestBS: IBusinessService { }
+
+            class TestBS: ITestBS {
+                public virtual void Foo();
+            }
+            ";
             VerifyCSharpFix(test, fixtest);
         }
 
