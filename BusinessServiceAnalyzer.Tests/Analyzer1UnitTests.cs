@@ -26,23 +26,23 @@ namespace BusinessServiceAnalyzer.Tests {
        // TODO [TestMethod]
         public void TestMethod2() {
             var test      = @"
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Diagnostics;
+            using Pharmatechnik.Apotheke.XTplus.Framework.Core.IBOL;
 
-    namespace ConsoleApplication1
-    {
-        class TypeName
-        {   
-        }
-    }";
+            namespace Pharmatechnik.Apotheke.XTplus.Framework.Core.IBOL {
+                interface IBusinessService { }
+            }
+
+            interface ITestBS: IBusinessService { }
+
+            class TestBS {
+                public void Foo();
+            }
+            ";
+
             var expected  = new DiagnosticResult {
-                Id        = "Analyzer1",
-                Message   = String.Format("Type name '{0}' contains lowercase letters", "TypeName"),
-                Severity  = DiagnosticSeverity.Warning,
+                Id        = Pharmatechnik.Apotheke.XTplus.Analyzer.BusinessServiceAnalyzer.VirtualMethodDiagnosticId,
+                Message   = $"Business service method 'Foo()' has to be virtual.",
+                Severity  = DiagnosticSeverity.Error,
                 Locations =
                     new[] {
                         new DiagnosticResultLocation("Test0.cs", 11, 15)

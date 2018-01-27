@@ -20,7 +20,7 @@ namespace Pharmatechnik.Apotheke.XTplus.Analyzer {
         static readonly DiagnosticDescriptor VirtualMethodRule = new DiagnosticDescriptor(
             id                : VirtualMethodDiagnosticId,
             title             : "Business service methods",
-            messageFormat     : (LocalizableString) "Business service method '{0}' has to be virtual.",
+            messageFormat     : "Business service method '{0}' has to be virtual.",
             category          : Category, 
             defaultSeverity   : DiagnosticSeverity.Error,
             isEnabledByDefault: true,
