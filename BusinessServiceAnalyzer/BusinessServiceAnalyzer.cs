@@ -12,28 +12,26 @@ namespace Pharmatechnik.Apotheke.XTplus.Analyzer {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class BusinessServiceAnalyzer: DiagnosticAnalyzer {
 
-        private const string Category = "IXOS BusinessService";
+        private const string Category = "IXOS.BusinessService";
 
         public static readonly string VirtualMethodDiagnosticId = "BS001";
         public static readonly string SealedMethodDiagnosticId  = "BS002";
 
         static readonly DiagnosticDescriptor VirtualMethodRule = new DiagnosticDescriptor(
             id                : VirtualMethodDiagnosticId,
-            title             : "Business service methods",
+            title             : "Methods implementing a member of a business service have to be virtual",
             messageFormat     : "Business service method '{0}' has to be virtual.",
             category          : Category, 
             defaultSeverity   : DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description       : "Methods implementing a member of a business service have to be virtual.");
+            isEnabledByDefault: true);
 
         static readonly DiagnosticDescriptor SealedMethodRule = new DiagnosticDescriptor(
             id                : SealedMethodDiagnosticId,
-            title             : "Business service methods",
+            title             : "Methods implementing a member of a business service have to be overridable",
             messageFormat     : "Business service method '{0}' has to be overridable.",
             category          : Category,
             defaultSeverity   : DiagnosticSeverity.Error,
-            isEnabledByDefault: true,
-            description       : "Methods implementing a member of a business service have to be overridable.");
+            isEnabledByDefault: true);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(VirtualMethodRule, SealedMethodRule);
 
