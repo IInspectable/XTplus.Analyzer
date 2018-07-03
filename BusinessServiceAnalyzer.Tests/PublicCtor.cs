@@ -1,8 +1,5 @@
 #region Using Directives
 
-using BusinessServiceAnalyzer.Tests.Helpers;
-
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion

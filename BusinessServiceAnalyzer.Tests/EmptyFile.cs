@@ -1,6 +1,5 @@
 #region Using Directives
 
-using Microsoft.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #endregion
